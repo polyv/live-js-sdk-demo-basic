@@ -1,0 +1,104 @@
+.plv-watch-mobile {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.plv-watch-mobile__top {
+  padding-top: 56.25%;
+  height: 0;
+  position: relative;
+}
+
+.plv-watch-mobile-player {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.plv-watch-mobile-chatroom {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* 移动端聊天室SDK样式覆写 */
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room {
+  background: #202127;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-cr-head {
+  background: #3e3e4e;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-cr-navbar {
+  color: #fff;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room .polyv-cr-navbar>li.polyv-crn-active {
+  color: #fff;
+  border: 0
+}
+.plv-watch-mobile .plv-skin--dark li.polyv-crn-active>span {
+  display: inline-block;
+  line-height: 35px;
+  border-bottom: 2px solid #fff;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room>.polyv-cr-body {
+  background: #202127;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-input {
+  background: #202127;
+}
+.plv-watch-mobile .plv-skin--dark .mobile-wrap .polyv-chat-input input {
+  color: #e4e4e4;
+  background: #2b2c35;
+  border: 0
+}
+.plv-watch-mobile .plv-skin--dark .mobile-wrap .polyv-mobile-send {
+  color: #fff;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room .polyv-emotion-wrap {
+  background: #202127;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room .polyv-emotion-wrap:after {
+  border-color: #202127 transparent transparent;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room .polyv-chat-list>.polyv-msg {
+  color: #adadc0;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room .polyv-msg-content {
+  background: #2b2c35;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room .polyv-chat-input .polyv-icon-emotion {
+  background: url('../img/emotion.png');
+  background-size: 20px 20px;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room .polyv-chat-input .polyv-icon-flower {
+  background: url('../img/flower.png');
+  background-size: 20px 20px;
+}
+.plv-watch-mobile .plv-skin--dark .mobile-wrap .polyv-chat-input .polyv-icon-more {
+  background: url('../img/more.png');
+  background-size: 20px 20px;
+}
+.plv-watch-mobile .plv-skin--dark .mobile-wrap .polyv-show-more .polyv-icon-more {
+  background: url('../img/show-more.png');
+  background-size: 20px 20px;
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room>.polyv-cr-body .polyv-set-nickname.show {
+  background: #3e3e4e
+}
+.plv-watch-mobile .plv-skin--dark .polyv-chat-room>.polyv-cr-body .polyv-set-nickname input {
+  background: #212121;
+  border: 0;
+}
+.plv-watch-mobile .plv-skin--dark .mobile-wrap .polyv-set-nickname>div>button {
+  color: #fff;
+}
+.plv-watch-mobile .plv-skin--dark .mobile-wrap .polyv-chat-input-more {
+  background: #3e3e4e;
+}
+.plv-watch-mobile .plv-skin--dark .mobile-wrap .polyv-more-control-list>li>span {
+  color: #fff;
+}
