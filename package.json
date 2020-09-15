@@ -1,0 +1,11 @@
+{
+  "name": "live-js-sdk-demo",
+  "version": "1.0.0",
+  "description": "A demo for POLYV live JS-SDK",
+  "author": "POLYV frontend team",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}

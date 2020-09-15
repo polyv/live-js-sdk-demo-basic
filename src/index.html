@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>Live SDK Demo</title>
+  <link rel="icon" href="./img/favicon.ico" />
+  <link rel="stylesheet" href="https://player.polyv.net/jssdk/polyv-chatroom.min.css" />
+  <link rel="stylesheet" type="text/css" href="./css/public.css" />
+  <link rel="stylesheet" type="text/css" href="./css/pc.css" />
+  <link rel="stylesheet" type="text/css" href="./css/mobile.css" />
+</head>
+
+<body>
+  <div id="plv-config" style="display: none;">
+    <p class="plv-config__title">直播JS-SDK Demo</p>
+    <div class="plv-config__content">
+      <input class="plv-config__input" placeholder="请输入频道号" name="plv-channel-id" />
+      <input class="plv-config__input" placeholder="请输入appId" name="plv-app-id" />
+      <input class="plv-config__input" placeholder="请输入appSecret" name="plv-app-secret" />
+      <button class="plv-config__button">打开观看页</button>
+    </div>
+  </div>
+  <!-- pc端 -->
+  <div class="plv-watch-pc" style="display: none;">
+    <div class="plv-watch-pc__top" id="plv-pc-top">
+      <div class="plv-watch-pc__screen plv-watch-pc__screen-main">
+        <div class="plv-watch-pc__screen__height">
+          <div class="plv-watch-pc__screen__inner" id="plv-pc-main"></div>
+        </div>
+      </div>
+
+      <div class="plv-watch-pc__screen plv-watch-pc__screen-sub">
+        <div class="plv-watch-pc__screen__height">
+          <div class="plv-watch-pc__screen__inner" id="plv-pc-side"></div>
+        </div>
+      </div>
+
+      <div class="plv-watch-pc__side">
+        <div class="plv-watch-pc__chat plv-skin--dark" id="plv-pc-chat">
+        </div>
+      </div>
+    </div>
+
+    <div id="plv-pc-channel-info" class="plv-watch-pc__info">
+      <img class="plv-watch-pc__info__logo" src="https://live.polyv.cn/assets/wimages/pc_images/logo.png" />
+      <div class="plv-watch-pc__info__desc">
+        <p class="plv-watch-pc__info__desc__name"></p>
+        <span class="plv-watch-pc__info__desc__publisher-ico"></span>
+        <span class="plv-watch-pc__info__desc__publisher"></span>
+        <span class="plv-watch-pc__info__desc__view"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 移动端 -->
+  <div class="plv-watch-mobile" style="display: none;">
+    <div class="plv-watch-mobile__top">
+      <div class="plv-watch-mobile-player" id="plv-mobile-player"></div>
+    </div>
+    <div class="plv-watch-mobile-chatroom plv-skin--dark" id="plv-mobile-chat"></div>
+  </div>
+
+  <script src="./lib/md5.min.js"></script>
+  <script src="https://player.polyv.net/jssdk/polyv-chatroom.min.js"></script>
+  <script src="https://player.polyv.net/livesdk/polyv-live.min.js"></script>
+  <script src="./lib/jquery.min.js"></script>
+  <script src="./lib/jquery.xdomainrequest.min.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>

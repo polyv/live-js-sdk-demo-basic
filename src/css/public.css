@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-size: 14px;
+}
+
+#plv-config {
+  position: fixed;
+  width: 300px;
+  height: 400px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 20px;
+  margin: auto;
+  text-align: center;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.plv-config__title {
+  font-size: 18px;
+  font-weight: 400;
+  margin-top: 20px
+}
+
+.plv-config__content {
+  margin-top: 40px;
+}
+
+.plv-config__input {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  padding: 0 5px;
+  width: 220px;
+  height: 38px;
+  line-height: 38px;
+  border: 1px solid #bfbfbf;
+  border-radius: 3px;
+}
+
+.plv-config__button {
+  margin-top: 7px;
+  width: 220px;
+  line-height: 38px;
+  background: #222791;
+  color: #fff;
+  border-radius: 3px;
+  outline: none;
+  border: none;
+}
