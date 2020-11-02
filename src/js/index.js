@@ -4,6 +4,9 @@
   var utils = window.plvUtils; // 工具函数
   var PolyvChatRoom = window.PolyvChatRoom; // 聊天室JS-SDK
   var PolyvLiveSdk = window.PolyvLiveSdk; // 直播JS-SDK
+  var plvMenu = window.plvMenu; // 菜单栏
+  var Tool = window.miniTool; // 小工具
+  var Login = window.LoginModule; // 登陆模块
 
   // 用户 id。应设为用户系统中的用户 id，本 demo 生成方式仅供演示
   var userId = (new Date().getTime()).toString() +
@@ -35,10 +38,16 @@
         }
       ],
     },
+
+    playerType: 'auto', // 播放器播放类型， 默认auto
+    vid: '' // 回放id, 用于回放模式时设置对应的回放
   };
 
   var platform = utils.isMobile() ? 'mobile' : 'pc';
   var timestamp = +new Date(); // sign 生成所需的时间戳
+
+  var $likeNum = ''; // 点赞按钮下的点赞数
+  var $introLike = ''; // 移动端直播介绍点赞数
 
   // SDK用到的容器元素的选择器， 移动端和PC的容器不同， 在preRender上设置
   var els = {
@@ -58,7 +67,22 @@
 
   if (!config.channelId || !config.appId || !config.appSecret) {
     // 没有配置config内的channelId, appId, appSecret时, 通过Input获得参数并加载观看页
-    initWatchByInput();
+    // 加载登陆模块
+    var login = new Login();
+    // 点击按钮“打开观看页”
+    login.onClickLogin(function(data) {
+      config.appId = data.appId;
+      config.appSecret = data.appSecret;
+      config.channelId = data.channelId;
+
+      // 设置回放模式后的参数设置
+      if (data.playbackMode) {
+        config.playerType = 'vod';
+        config.vid = data.vid;
+      }
+
+      initWatch();
+    });
   } else {
     // 观看页加载入口
     initWatch();
@@ -80,31 +104,6 @@
     });
   }
 
-  // 从输入框中的直播基础参数并加载观看页
-  function initWatchByInput() {
-    var $config = $('#plv-config');
-
-    $config.show();
-
-    // 给按钮绑定点击事件
-    $('.plv-config__button').click(function() {
-      var appId = $config.find('[name=plv-app-id]').val();
-      var appSecret = $config.find('[name=plv-app-secret]').val();
-      var channelId = $config.find('[name=plv-channel-id]').val();
-
-      if (appId && appSecret && channelId) {
-        config.appId = appId;
-        config.appSecret = appSecret;
-        config.channelId = channelId;
-
-        $config.hide();
-        initWatch();
-      } else {
-        alert('请检查参数');
-      }
-    });
-  }
-
   // 不同场景和平台下的处理
   function preRender(channelInfo) {
     var scene = plv.scene = channelInfo.scene; // scene的值为 alone(普通直播)或ppt(三分屏)
@@ -112,8 +111,13 @@
       $('.plv-watch-mobile').css('display', '');
       els.playerEl = '#plv-mobile-player'; // 讲师区域元素
       els.chatContainer = '#plv-mobile-chat'; // DOM选择器，HTML元素，用于渲染聊天室
+      config.chat.tabData.unshift({
+        name: '直播介绍',
+        type: 'intro'
+      });
     } else {
       $('.plv-watch-pc').css('display', '');
+      $('.plv-pc-menu').css('display', '');
       setChannelInfo(channelInfo);
     }
 
@@ -191,9 +195,9 @@
       container: els.chatContainer,
       enableWelcome: true, // 是否开启欢迎语，默认为true
       enableFlower: true, // 是否开启送花功能，默认为true
-      enableLike: true, // 是否开启点赞，默认为true
       enableOnlyTeacher: true, // 是否开启只看讲师功能，默认为true
       tabData: config.chat.tabData,
+      enableLike: false,
       roomMessage: function(data) {
         // data为聊天室socket消息，当有聊天室消息时会触发此方法
         var event = data.EVENT;
@@ -212,7 +216,7 @@
     });
 
     plv.socket = chatroom.chat.socket;
-    plv.scene === 'ppt' && plv.platform === 'mobile' && handlePptTabClick(); // 移动端三分屏场景，切换到文档tab时需要调用一下resize
+    plv.scene === 'ppt' && platform === 'mobile' && handlePptTabClick(); // 移动端三分屏场景，切换到文档tab时需要调用一下resize
   }
 
   // 初始化直播JS-SDK, 文档： https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/#ppt
@@ -245,7 +249,7 @@
   }
 
   // 创建播放器，文档: https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/#i-7
-  function createLiveSdkPlayer() {
+  function createLiveSdkPlayer(event, data) {
     plv.liveSdk.setupPlayer({
       el: els.playerEl,
       pptEl: els.pptEl,
@@ -254,11 +258,27 @@
       controllerPosition: 'ppt',
       fixedController: true,
       controllerEl: els.controllerEl,
-      type: 'auto',
+      type: config.playerType,
+      vid: config.vid,
       pptNavBottom: '80px',
       barrage: true, // 是否开启弹幕
       defaultBarrageStatus: true,
       autoplay: true
+    });
+
+    // 渲染菜单, 移动端只渲染直播介绍, pc端只渲染直播介绍与自定义图文菜单
+    plvMenu.renderMenu(data, data.channelMenus);
+
+    // 渲染点赞按钮
+    renderLike(data.likes);
+
+    // 渲染直播状态小控件
+    renderLiveStatus(data);
+
+    // 加载小工具
+    new Tool({
+      container: '#plv-pc-chat',
+      liveSdkEl: plv.liveSdk
     });
 
     // 监听直播JS-SDK的播放器事件，请参考实例 player 对象的事件
@@ -339,4 +359,58 @@
     plv.liveSdk.destroy(); // 直播JS-SDK销毁, 默认销毁时会断开socket的连接
   }
 
+  function createLikeBtnHTML(num) {
+    return '' +
+      '<div class="plv-watch__likes">' +
+        '<span class="plv-watch__likes-icon"></span>' +
+        '<p class="plv-watch__likes-num">' + num + '</p>' +
+      '</div>';
+  }
+
+  // 渲染点赞按钮
+  function renderLike(num) {
+    var html = createLikeBtnHTML(num);
+    var $like = $(html);
+    $('#tab-chat').append($like);
+
+    var timer = null;
+    var totalLike = num;
+    $introLike = platform === 'mobile' ? $('#intro-likes') : '';
+    $likeNum = $('.plv-watch__likes-num');
+    // 添加点击事件
+    $like.children('.plv-watch__likes-icon').click(function() {
+      if (timer) { return; }
+
+      timer = setTimeout(function() {
+        totalLike++;
+        $likeNum.text(totalLike);
+        $introLike && $introLike.text(totalLike);
+        plv.liveSdk.sendLike(1);
+        timer = null;
+      }, 500);
+    });
+
+  }
+
+  function createLiveStatusHTML(status) {
+    var statusClass = 'plv-watch__status--' + status;
+    return '<div id="plv-watch__status" class="' + statusClass + '"></div>';
+  }
+
+  // 渲染直播状态控件
+  function renderLiveStatus(data) {
+    var status = data.status === 'Y' ? 'live' : 'end';
+    var html = createLiveStatusHTML(status);
+    var $status = $(html);
+    if (platform === 'pc') {
+      $('.plv-watch-pc__info__desc__name').append($status);
+    } else {
+      $('.tab-intro-info__inner').append($status);
+    }
+
+    // 绑定streamUpdate事件, 流状态改变时也改变显示状态
+    plv.liveSdk.on(PolyvLiveSdk.EVENTS.STREAM_UPDATE, function(event, status) {
+      $status.removeClass().addClass('plv-watch__status--' + status);
+    });
+  }
 })();

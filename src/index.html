@@ -11,6 +11,7 @@
   <link rel="stylesheet" type="text/css" href="./css/public.css" />
   <link rel="stylesheet" type="text/css" href="./css/pc.css" />
   <link rel="stylesheet" type="text/css" href="./css/mobile.css" />
+  <link rel="stylesheet" type="text/css" href="./css/tool.css" />
 </head>
 
 <body>
@@ -20,6 +21,11 @@
       <input class="plv-config__input" placeholder="请输入频道号" name="plv-channel-id" />
       <input class="plv-config__input" placeholder="请输入appId" name="plv-app-id" />
       <input class="plv-config__input" placeholder="请输入appSecret" name="plv-app-secret" />
+      <input class="plv-config__input" placeholder="请输入回放vid" name="plv-playback-vid" style="display: none;" />
+      <div class="plv-config__checkbox">
+        <input class="plv-config__checkbox-input" id="plabackMode" type="checkbox" value="on"/>
+        <label for="plabackMode">纯回放模式</label>
+      </div>
       <button class="plv-config__button">打开观看页</button>
     </div>
   </div>
@@ -55,6 +61,14 @@
     </div>
   </div>
 
+  <!-- pc菜单栏 -->
+  <div class="plv-pc-menu" style="display: none;">
+    <div class="plv-pc-menu__container">
+      <ul id="plv-menu-tab" class="plv-pc-menu__tab"></ul>
+      <div id="plv-menu-content" class="plv-pc-menu__content"></div>
+    </div>
+  </div>
+
   <!-- 移动端 -->
   <div class="plv-watch-mobile" style="display: none;">
     <div class="plv-watch-mobile__top">
@@ -69,6 +83,9 @@
   <script src="./lib/jquery.min.js"></script>
   <script src="./lib/jquery.xdomainrequest.min.js"></script>
   <script src="./js/utils.js"></script>
+  <script src="./js/login.js"></script>
+  <script src="./js/menu.js"></script>
+  <script src="./js/tool.js"></script>
   <script src="./js/index.js"></script>
 </body>
 
