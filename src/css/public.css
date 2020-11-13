@@ -11,7 +11,7 @@ body {
   font-size: 14px;
 }
 
-#plv-config {
+.plv-config {
   position: fixed;
   width: 300px;
   height: 430px;
@@ -53,7 +53,7 @@ body {
   font-size: 13px;
 }
 
-.plv-config__checkbox-input {
+.plv-config__checkbox__input {
   margin-left: 20px;
   vertical-align: top;
 }
@@ -78,7 +78,7 @@ body {
 .plv-watch-pc .plv-watch__likes {
   /* pc端位置 */
   right: 30px;
-  top: 20px;
+  top: 20%;
   bottom: auto;
 }
 #tab-chat .plv-watch__likes {

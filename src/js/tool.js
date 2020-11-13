@@ -1,3 +1,8 @@
+/**
+ * @file 小工具
+ * 用于测试一些接口或功能, 可移除
+ */
+
 (function(utils, $) {
   /**
    *
@@ -22,15 +27,21 @@
   }
 
   /**
-     * 渲染工具入口entrance
-     */
+   * 渲染工具入口entrance
+   */
   Tool.prototype.renderEnterance = function() {
     var self = this;
-    this.$entrance = $('<div class="tool-entrance">小工具</div>');
+    this.$entrance = $('<div class="tool-entrance">小工具<span class="tool-entrance__close">x</span></div>');
     this.$purposeDom.append(this.$entrance);
 
     this.$entrance.click(function() {
       self.toggle();
+    });
+
+    this.$entrance.find('.tool-entrance__close').click(function(e) {
+      e.stopPropagation();
+      self.$entrance.hide();
+      self.hide();
     });
   };
 
@@ -97,9 +108,9 @@
   };
 
   /**
-   *
-   * @param {*} key 注册的工具key值, 用作对象存储和作为元素的id
-   * @param {*} options 工具的设置
+   * 注册小工具的功能
+   * @param {String} key 注册的工具key值, 用作对象存储和作为元素的id
+   * @param {Object} options 工具的设置
    * @param {String} options.name 按钮的显示的名称
    * @param {String} options.type 功能的类型 btn | input (btn为纯按钮, input为按钮 + 输入框的组合)
    * @param {function} options.handler 按钮点击事件回调函数
@@ -216,7 +227,7 @@
         liveSdk.switchVod({
           vid: value
         });
-        console.info('切换回放');
+        console.info('切换回放:' + value);
       }
     });
 
@@ -227,6 +238,7 @@
         var $input = event.data;
         var value = $input.val();
         liveSdk.sendQuestion(value);
+        console.info('发送私聊:' + value);
         $input.val('');
       }
     });

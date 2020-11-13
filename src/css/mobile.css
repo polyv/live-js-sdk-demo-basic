@@ -104,16 +104,16 @@
 }
 
 /* 移动端直播介绍 */
-#tab-intro {
+.tab-intro {
   overflow-y: auto;
 }
 
-#tab-intro .tab-intro-info {
+.tab-intro .tab-intro-info {
   position: relative;
   padding: 16px;
   display: flex;
 }
-#tab-intro .tab-intro-info__logo {
+.tab-intro .tab-intro-info__logo {
   width: 40px;
   height: 40px;
   margin-right: 10px;
@@ -128,7 +128,7 @@
   font-size: 16px;
 }
 
-#tab-intro .tab-intro-info__status::after {
+.tab-intro .tab-intro-info__status::after {
   position: absolute;
   top: 0;
   right: 0;
@@ -139,32 +139,32 @@
   line-height: 1;
 }
 
-#tab-intro .tab-intro-info__status--nolive::after {
+.tab-intro .tab-intro-info__status--nolive::after {
   border-color: hsla(0,0%,100%,.6);
   color: hsla(0,0%,100%,.6);
   content: '暂无直播'
 }
 
-#tab-intro .tab-intro-info__status--playback::after {
+.tab-intro .tab-intro-info__status--playback::after {
   color: #78a7ed;
   border-color: #78a7ed;
   content: '回放中'
 }
 
-#tab-intro .tab-intro-info__status--live::after {
+.tab-intro .tab-intro-info__status--live::after {
   color: #f06e6e;
   border-color: #f06e6e;
   content: '进行中'
 }
 
-#tab-intro .tab-intro-info__time {
+.tab-intro .tab-intro-info__time {
   margin-top: 8px;
   color: #adadc0;
   line-height: 1;
   font-size: 12px;
 }
 
-#tab-intro .tab-intro-author {
+.tab-intro .tab-intro-author {
   display: flex;
   padding: 10px 16px;
   border-top: 1px solid #000;
@@ -177,7 +177,7 @@
   flex: 1;
 }
 
-#tab-intro .tab-intro-author__publisher-ico {
+.tab-intro .tab-intro-author__publisher-ico {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -187,7 +187,7 @@
   margin-right: 2px;
 }
 
-#tab-intro .tab-intro-author__like-ico {
+.tab-intro .tab-intro-author__like-ico {
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -197,7 +197,7 @@
   margin-right: 2px;
 }
 
-#tab-intro .tab-intro-desc {
+.tab-intro .tab-intro-desc {
   padding:  20px 16px;
   color: #adadc0;
   white-space: pre-wrap;

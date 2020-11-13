@@ -1,3 +1,7 @@
+/**
+ * @file 频道信息配置
+ */
+
 (function($) {
   function Login() {
     this.appSecret = '';
@@ -12,16 +16,10 @@
     this.init();
   }
 
-  /**
-   * 显示登陆模块
-   */
   Login.prototype.show = function() {
     this.$login.show();
   };
 
-  /**
-   * 隐藏登陆模块
-   */
   Login.prototype.hide = function() {
     this.$login.hide();
   };
@@ -31,7 +29,7 @@
    */
   Login.prototype.init = function() {
     var self = this;
-    this.$login = $('#plv-config');
+    this.$login = $('.plv-config');
     this.$playbackCheckbox = this.$login.find('#plabackMode');
     this.$inputVid = this.$login.find('[name=plv-playback-vid]');
 
@@ -57,9 +55,6 @@
     });
   };
 
-  /**
-   * 绑定事件
-   */
   Login.prototype.addListener = function() {
     var self = this;
     this.$playbackCheckbox.change(function() {
@@ -76,18 +71,19 @@
 
   /**
    * 绑定点击事件
-   * @param {Function} callback 点击“打开观看页”按钮后的需要触发的回调函数
+   * @param {btnClickCallback} cb 点击“打开观看页”按钮后的需要触发的回调函数
    */
-  Login.prototype.onClickLogin = function(callback) {
-    this.clickCallback = callback;
+  Login.prototype.onClickLogin = function(cb) {
+    this.clickCallback = cb;
   };
   /**
    * 触发回调并传入参数
-   * @returns {String} appSecret 应用密匙
-   * @returns {String} appId 应用ID
-   * @returns {String} channelId 频道id
-   * @returns {Boolean}} playbackMode 是否为纯回放模式
-   * @returns {String} vid 回放id
+   * @callback btnClickCallback
+   * @param {String} appSecret 应用密匙
+   * @param {String} appId 应用ID
+   * @param {String} channelId 频道id
+   * @param {Boolean} playbackMode 是否为纯回放模式
+   * @param {String} vid 回放id
    */
   Login.prototype.handleClickLogin = function() {
     this.clickCallback({

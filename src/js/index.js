@@ -95,12 +95,24 @@
       timestamp: timestamp,
       channelId: config.channelId
     };
+
+    // 用于请求get-api-token接口的参数, 注意,ie不支持Object.assign, 需要做兼容处理
+    var apiTokenParams = Object.assign(utils.deepCopy(channelInfoParams), {
+      viewerId: config.userId
+    });
+
     // ！！！不要在前端生成sign，此处仅供参考
     channelInfoParams.sign = utils.getSign(config.appSecret, channelInfoParams);
+    apiTokenParams.sign = utils.getSign(config.appSecret, apiTokenParams);
 
     utils.getChannelInfo(channelInfoParams, function(res) {
       preRender(res);
-      loadSdk();
+      loadSdk(function() {
+        // SDK设置接口token, 用于一些互动的功能接口的请求,如点赞.
+        utils.getApiToken(apiTokenParams, function(data) {
+          plv.liveSdk.setApiToken(data.token);
+        });
+      });
     });
   }
 
@@ -159,7 +171,10 @@
   }
 
   // 加载SDK
-  function loadSdk() {
+  // @param callback {sdkLoadCallback} 加载SDK实例后的回调.
+  // 注意, 该回调触发只能说明SDK的实例化了, 直播JS-SDK的播放器不一定加载完了.
+  // @callback sdkLoadCallback
+  function loadSdk(sdkLoadCallback) {
     // 聊天室JS-SDK加载需要先请求校验码
     var chatApiParam = {
       appId: config.appId,
@@ -174,6 +189,8 @@
     utils.getChatToken(chatApiParam, function(res) {
       createChatRoom(res);
       createLiveSdk();
+
+      sdkLoadCallback();
     });
   }
 
@@ -246,6 +263,7 @@
     // 监听直播JS-SDK的事件， 事件列表: https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/#i-9
     plv.liveSdk.on(PolyvLiveSdk.EVENTS.CHANNEL_DATA_INIT, createLiveSdkPlayer); // 监听频道信息并初始化播放器
     plv.liveSdk.on(PolyvLiveSdk.EVENTS.STREAM_UPDATE, handleStreamUpdate); // 监听流状态变化
+
   }
 
   // 创建播放器，文档: https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/#i-7
@@ -377,7 +395,7 @@
     var totalLike = num;
     $introLike = platform === 'mobile' ? $('#intro-likes') : '';
     $likeNum = $('.plv-watch__likes-num');
-    // 添加点击事件
+
     $like.children('.plv-watch__likes-icon').click(function() {
       if (timer) { return; }
 
@@ -387,7 +405,7 @@
         $introLike && $introLike.text(totalLike);
         plv.liveSdk.sendLike(1);
         timer = null;
-      }, 500);
+      }, 1000);
     });
 
   }

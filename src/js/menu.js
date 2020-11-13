@@ -1,3 +1,9 @@
+/**
+ * @file 菜单栏
+ * 在PC端上能显示直播介绍和自定义的图文菜单
+ * 在移动端上只渲染直播介绍
+ */
+
 window.plvMenu = (function() {
   // 依赖
   var utils = window.plvUtils;
@@ -70,6 +76,7 @@ window.plvMenu = (function() {
     for (var i = 0; i < menuArray.length; i++) {
       if (menuArray[i].menuType === 'desc') {
         descContent = menuArray[i].content;
+        break;
       }
     }
     return '' +
@@ -104,8 +111,8 @@ window.plvMenu = (function() {
   /**
    * 渲染菜单,PC端会渲染自定义的图文菜单
    * 移动端只渲染直播介绍的tab的内容
-   * @param {*} data 频道信息
-   * @param {*} menus 频道菜单
+   * @param {Object} data 频道信息 移动端必须
+   * @param {Array} menus 频道菜单 必须
    */
   function renderMenu(data, menus) {
     if (utils.isMobile()) {

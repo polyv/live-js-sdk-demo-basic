@@ -2,12 +2,12 @@
   position: absolute;
   z-index: 99;
   top: 0;
-  right: 0;
+  left: -30px;
   bottom: 0;
   margin: auto;
   display: inline-block;
   width: 30px;
-  height: 67px;
+  height: 85px;
   padding: 5px;
   background: #333;
   text-align: center;
