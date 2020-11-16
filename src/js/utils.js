@@ -64,6 +64,23 @@ window.plvUtils = (function($, md5) {
   }
 
   /**
+   * 获取观众观看调用接口token, 部分SDK的接口会用到这个token
+   * @param {Object} params 参与sign生成的参数，详细请看sign生成规则
+   * @param {Function} callback 接口请求成功后的回调
+   */
+  function getApiToken(params, callback) {
+    var api = getProtocol() + '//api.polyv.net/live/v3/channel/watch/get-api-token';
+    request({
+      url: api,
+      method: 'POST',
+      data: params,
+      success: function(res) {
+        callback(res.data);
+      }
+    });
+  }
+
+  /**
    * 获得聊天室的校验token
    * http://dev.polyv.net/2019/liveproduct/l-api/zbglgn/pdcz/get-chat-token/
    * @param {Object} params 参与sign生成的参数，详细请看sign生成规则
@@ -83,7 +100,6 @@ window.plvUtils = (function($, md5) {
 
   /**
    * 封装了一下ajax, 加上一些特殊情况的处理
-   * todo 干掉layer
    * @param {Object} options ajax请求的参数
    */
   function request(options) {
@@ -98,10 +114,57 @@ window.plvUtils = (function($, md5) {
     $.ajax(config);
   }
 
+  /**
+   * 简单的对象深拷贝, 有些情况的深拷贝可能不支持
+   * @param obj {Object} 对象
+   */
+  function deepCopy(obj) {
+    var rs;
+    try {
+      rs = JSON.parse(JSON.stringify(obj));
+    } catch (e) {
+      rs = {};
+      console.warn('JSON parse error');
+    }
+    return rs;
+  }
+
+  /**
+   * 简单的polyfill
+   */
+  function simplePolyfill() {
+    // IE支持assign
+    if (typeof Object.assign != 'function') {
+      Object.assign = function(target) {
+        'use strict';
+        if (target == null) {
+          throw new TypeError('Cannot convert undefined or null to object');
+        }
+
+        target = Object(target);
+        for (var index = 1; index < arguments.length; index++) {
+          var source = arguments[index];
+          if (source != null) {
+            for (var key in source) {
+              if (Object.prototype.hasOwnProperty.call(source, key)) {
+                target[key] = source[key];
+              }
+            }
+          }
+        }
+        return target;
+      };
+    }
+  }
+
+  simplePolyfill();
+
   return {
     getSign: getSign,
     isMobile: isMobile,
     getChannelInfo: getChannelInfo,
-    getChatToken: getChatToken
+    getChatToken: getChatToken,
+    getApiToken: getApiToken,
+    deepCopy: deepCopy
   };
 })(window.jQuery, window.md5);

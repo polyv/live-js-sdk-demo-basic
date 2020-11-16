@@ -33,6 +33,10 @@
 | | 答题卡 | 即将支持 |
 | | 问卷 | 即将支持 |
 | | 抽奖 | 即将支持 |
+| 其他 | 直播介绍  | ✔ |
+| | 自定义图文菜单 | ✔ |
+| | 直播间状态显示 | ✔ |
+| | 纯回放模式 | ✔ |
 
 ### 浏览器兼容性
 - 支持主流 PC 浏览器，包括 Chrome、Safari、Edge、Firefox、IE(>=10) 等 。
@@ -76,3 +80,14 @@ Demo 的源码位于项目的 src 目录下。注意，直接双击 index.html *
 - [blueimp-md5](https://github.com/blueimp/JavaScript-MD5) 版本 2.11.0
 - [jquery](https://github.com/jquery/jquery) 版本 2.2.4
 - [Cross-Domain AJAX](https://github.com/MoonScript/jQuery-ajaxTransport-XDomainRequest) 兼容IE9
+
+### 版本更新
+#### v1.1.0
+  - 增加直播介绍
+  - 配置页(或登录页)支持设置纯回放模式
+  - 增加直播间状态显示
+  - 新增点赞按钮
+  - 新增"小工具", 用于调试一些功能
+  - 注: 移动端不支持自定义的图文菜单
+#### V1.0.0
+

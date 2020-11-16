@@ -11,10 +11,10 @@ body {
   font-size: 14px;
 }
 
-#plv-config {
+.plv-config {
   position: fixed;
   width: 300px;
-  height: 400px;
+  height: 430px;
   top: 0;
   right: 0;
   bottom: 0;
@@ -39,13 +39,23 @@ body {
 .plv-config__input {
   position: relative;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   padding: 0 5px;
   width: 220px;
   height: 38px;
   line-height: 38px;
   border: 1px solid #bfbfbf;
   border-radius: 3px;
+}
+
+.plv-config__checkbox {
+  text-align: left;
+  font-size: 13px;
+}
+
+.plv-config__checkbox__input {
+  margin-left: 20px;
+  vertical-align: top;
 }
 
 .plv-config__button {
@@ -57,4 +67,80 @@ body {
   border-radius: 3px;
   outline: none;
   border: none;
+}
+
+/* 点赞 */
+.plv-watch__likes {
+  position: absolute;
+  text-align: center;
+}
+
+.plv-watch-pc .plv-watch__likes {
+  /* pc端位置 */
+  right: 30px;
+  top: 20%;
+  bottom: auto;
+}
+#tab-chat .plv-watch__likes {
+  /* 移动端位置 */
+  right: 16px;
+  bottom: 120px;
+}
+.plv-watch__likes-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: url('../img/btn-like.png');
+  background-size: cover;
+  cursor: pointer;
+}
+.plv-watch__likes-num {
+  color: #adadc0;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* 直播状态 */
+.plv-watch-mobile #plv-watch__status {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.plv-watch-mobile #plv-watch__status::after {
+  border-radius: 2px;
+  font-size: 12px;
+  padding: 4px;
+  border: 1px solid;
+  line-height: 1;
+}
+
+.plv-watch-pc #plv-watch__status {
+  display: inline-block;
+  margin-left: 10px;
+}
+.plv-watch-pc #plv-watch__status::after {
+  border-radius: 2px;
+  font-size: 12px;
+  padding: 0 4px;
+  border: 1px solid;
+  line-height: 1;
+}
+
+.plv-watch__status--end::after {
+  border-color: hsla(0,0%,100%,.6);
+  color: hsla(0,0%,100%,.6);
+  content: '暂无直播'
+}
+
+.plv-watch__status--playback::after {
+  color: #78a7ed;
+  border-color: #78a7ed;
+  content: '回放中'
+}
+
+.plv-watch__status--live::after {
+  color: #f06e6e;
+  border-color: #f06e6e;
+  content: '进行中'
 }
