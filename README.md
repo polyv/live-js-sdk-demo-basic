@@ -49,9 +49,9 @@ Demo 的源码位于项目的 src 目录下。注意，直接双击 index.html *
 
 您还可以结合 POLYV 官方文档查阅 demo 源码：
 
-- [直播 JavaScript SDK 使用文档](https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/)
-- [直播聊天室JS-SDK](https://dev.polyv.net/2019/liveproduct/zblts/chat_js_sdk/)
-- [直播API签名规则](https://dev.polyv.net/2018/liveproduct/l-api/notice/sign/)
+- [直播 JavaScript SDK 使用文档](https://help.polyv.net/index.html#/live/js/live_js_sdk/live_js_sdk)
+- [直播聊天室JS-SDK](https://help.polyv.net/index.html#/live/js/chat_js_sdk)
+- [直播API签名规则](https://help.polyv.net/index.html#/live/api/buildSign)
 
 
 ## 补充说明
@@ -68,7 +68,7 @@ Demo 的源码位于项目的 src 目录下。注意，直接双击 index.html *
 此外， 移动端不支持自动播放。
 
 ### 关于回放
-播放器的配置参数[type](https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/#i-7)会影响播放器的回放：
+播放器的配置参数[type](https://help.polyv.net/index.html#/live/js/live_js_sdk/live_js_sdk?id=%E5%AE%9E%E4%BE%8B%E5%B1%9E%E6%80%A7)会影响播放器的回放：
 - 设置为 `auto` 时，根据频道的实际设置自动选择播放类型，也是 demo 页的设置。此时播放器会按以下优先级播放视频：
   1. 直播；
   2. 回放列表视频；
