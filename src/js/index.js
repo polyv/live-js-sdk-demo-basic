@@ -26,7 +26,7 @@
     role: 'viewer', // 角色, 用于获取授权和连麦token http://api.polyv.net/live/v3/channel/common/get-chat-token
     chat: {
       userType: 'student', // 普通直播默认为student 三分屏为slice
-      // 在 preRender 函数中，移动端会添加 ppt 的 tab。自定义菜单栏文档: https://dev.polyv.net/2019/liveproduct/zblts/chat_js_sdk/#i-4
+      // 在 preRender 函数中，移动端会添加 ppt 的 tab。自定义菜单栏文档: https://help.polyv.net/index.html#/live/js/chat_js_sdk_api?id=自定义菜单栏
       tabData: [
         {
           name: '聊天', // 菜单栏名称
@@ -194,7 +194,7 @@
     });
   }
 
-  // 初始化聊天室, 聊天室参数的设置可以参考文档 https://dev.polyv.net/2019/liveproduct/zblts/chat_js_sdk/
+  // 初始化聊天室, 聊天室参数的设置可以参考文档 https://help.polyv.net/index.html#/live/js/chat_js_sdk_api
   function createChatRoom(res) {
     var chatroom = new PolyvChatRoom({
       roomId: config.channelId,
@@ -236,7 +236,7 @@
     plv.scene === 'ppt' && platform === 'mobile' && handlePptTabClick(); // 移动端三分屏场景，切换到文档tab时需要调用一下resize
   }
 
-  // 初始化直播JS-SDK, 文档： https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/#ppt
+  // 初始化直播JS-SDK, 文档： https://help.polyv.net/index.html#/live/js/live_js_sdk/live_js_sdk
   function createLiveSdk() {
     // ！！！不要在前端生成sign，此处仅供参考
     var sign = utils.getSign(config.appSecret, {
@@ -260,13 +260,13 @@
       param5: '播放器自定义统计参数5'
     });
 
-    // 监听直播JS-SDK的事件， 事件列表: https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/#i-9
+    // 监听直播JS-SDK的事件， 事件列表: https://help.polyv.net/index.html#/live/js/live_js_sdk/live_js_api?id=事件列表
     plv.liveSdk.on(PolyvLiveSdk.EVENTS.CHANNEL_DATA_INIT, createLiveSdkPlayer); // 监听频道信息并初始化播放器
     plv.liveSdk.on(PolyvLiveSdk.EVENTS.STREAM_UPDATE, handleStreamUpdate); // 监听流状态变化
 
   }
 
-  // 创建播放器，文档: https://dev.polyv.net/2019/liveproduct/l-sdk/web-sdk/#i-7
+  // 创建播放器，文档: https://help.polyv.net/index.html#/live/js/live_js_sdk/live_js_api?id=实例方法
   function createLiveSdkPlayer(event, data) {
     plv.liveSdk.setupPlayer({
       el: els.playerEl,

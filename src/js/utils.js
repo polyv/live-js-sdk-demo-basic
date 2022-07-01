@@ -47,7 +47,7 @@ window.plvUtils = (function($, md5) {
 
   /**
    * 获得频道基础信息
-   * https://dev.polyv.net/2019/liveproduct/l-api/zbglgn/pdcz/get-detail-setting/
+   * https://help.polyv.net/index.html#/live/api/channel/operate/get_channel_detail_setting
    * @param {Object} params 参与sign生成的参数，详细请看sign生成规则
    * @param {Function} callback 接口请求成功后的回调
    */
@@ -82,7 +82,7 @@ window.plvUtils = (function($, md5) {
 
   /**
    * 获得聊天室的校验token
-   * http://dev.polyv.net/2019/liveproduct/l-api/zbglgn/pdcz/get-chat-token/
+   * https://help.polyv.net/index.html#/live/api/channel/operate/get_chat_token
    * @param {Object} params 参与sign生成的参数，详细请看sign生成规则
    * @param {Function} callback 接口请求成功后的回调
    */
