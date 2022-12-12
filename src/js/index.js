@@ -38,7 +38,8 @@
         }
       ],
     },
-
+    param4: '', // 统计参数param4
+    param5: '', // 统计参数param5
     playerType: 'auto', // 播放器播放类型， 默认auto
     vid: '' // 回放id, 用于回放模式时设置对应的回放
   };
@@ -215,6 +216,8 @@
       enableOnlyTeacher: true, // 是否开启只看讲师功能，默认为true
       tabData: config.chat.tabData,
       enableLike: false,
+      param4: config.param4,
+      param5: config.param5,
       roomMessage: function(data) {
         // data为聊天室socket消息，当有聊天室消息时会触发此方法
         var event = data.EVENT;
@@ -244,7 +247,6 @@
       channelId: config.channelId,
       timestamp: timestamp
     });
-
     plv.liveSdk = new PolyvLiveSdk({
       channelId: config.channelId,
       sign: sign,
@@ -256,8 +258,8 @@
         userName: config.nickname,
         pic: config.avatar
       },
-      param4: '播放器自定义统计参数4',
-      param5: '播放器自定义统计参数5'
+      param4: config.param4,
+      param5: config.param5,
     });
 
     // 监听直播JS-SDK的事件， 事件列表: https://help.polyv.net/index.html#/live/js/live_js_sdk/live_js_api?id=事件列表
