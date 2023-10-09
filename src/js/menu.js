@@ -84,7 +84,7 @@ window.plvMenu = (function() {
         '<img class="tab-intro-info__logo" src="' + data.coverImage + '" />' +
         '<div class="tab-intro-info__inner">' +
           '<p class="tab-intro-info__title">' + data.name + '</p>' +
-          '<p class="tab-intro-info__time">' + (data.startTime || '— —') + '|' + data.pageView + '次观看</p>' +
+          '<p class="tab-intro-info__time">' + (data.startTime || '— —') + '|' + data.pageView + '次访问</p>' +
         '</div>' +
       '</div>' +
       '<div class="tab-intro-author">' +
