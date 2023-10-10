@@ -167,7 +167,7 @@
     var pcInfo = $('#plv-pc-channel-info');
     pcInfo.find('.plv-watch-pc__info__desc__name').text(channelInfo.name);
     pcInfo.find('.plv-watch-pc__info__desc__publisher').text(channelInfo.publisher);
-    pcInfo.find('.plv-watch-pc__info__desc__view').text(channelInfo.pageView + ' 次观看');
+    pcInfo.find('.plv-watch-pc__info__desc__view').text(channelInfo.pageView + ' 次访问');
     pcInfo.show();
   }
 
